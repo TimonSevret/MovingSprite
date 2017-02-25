@@ -114,7 +114,11 @@ public class Niveau extends JPanel implements MouseListener {
 		
 		Iterator<EntiteTrace> itTrace = trace.iterator();
 		for(int i =0;i<trace.size();i++){
-			itTrace.next().rendu(g,(300 -joueur.getWidth())-joueur.getPosX(),300 -joueur.getHeight()-joueur.getPosY(),getWidth(),getHeight());
+			itTrace.next().rendu(g,
+					(300 -joueur.getWidth())-joueur.getPosX(),
+					300 -joueur.getHeight()-joueur.getPosY(),
+					getWidth(),
+					getHeight());
 		}
 	}
 	
@@ -252,8 +256,7 @@ public class Niveau extends JPanel implements MouseListener {
 					curseurY -= decalageVertical;
 				}
 			}
-			
 		}
-		
-}
+	}
+	
 }

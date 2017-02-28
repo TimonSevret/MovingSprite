@@ -1,5 +1,8 @@
 package vue;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -7,8 +10,12 @@ import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.LinkedList;
+
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.KeyStroke;
+
+import sun.awt.X11.Screen;
 import modele.Entite;
 import modele.EntiteTrace;
 import modele.GoblinStrat;
@@ -33,8 +40,7 @@ public class Niveau extends JPanel implements MouseListener {
 	private int positionYCLickSouris = 0;
 	private int positionXLacheSouris = 0;
 	private int positionYLacheSouris = 0;
-	private int tailleBlockTrace = 5;
-	private int ttlTrace = 75;
+	private JProgressBar barreMana;
 	
 	public Niveau(){
 		entite = new Entite[50][50];
@@ -95,6 +101,25 @@ public class Niveau extends JPanel implements MouseListener {
 				((JoueurStrat)(joueur.getStrat())).new ActionDeplacementPressedZ("pressed Z")  );
 
 		this.addMouseListener(this);
+		
+		this.setLayout(new GridBagLayout());
+		
+		barreMana = new JProgressBar(0, 100);
+		GridBagConstraints c = new GridBagConstraints();
+		barreMana.setVisible(true);
+		barreMana.setBorderPainted(true);
+		barreMana.setValue(65);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weighty = 1.0;
+		c.gridx = 0;
+		c.gridy = 0;
+		c.ipadx = 200;
+		c.insets = new Insets(0, 400, 0, 0);
+		c.anchor = GridBagConstraints.LAST_LINE_END;
+		this.add(barreMana, c);
+		
+		
+	
 	}
 	
 	public void paint(Graphics g){
@@ -205,18 +230,18 @@ public class Niveau extends JPanel implements MouseListener {
 			deltaY = positionYCLickSouris - positionYLacheSouris;
 		}
 		
-		int curseurX = positionXCLickSouris;
-		int curseurY = positionYCLickSouris;
+		int curseurX = positionXCLickSouris - (300 - joueur.getWidth() - joueur.getPosX());
+		int curseurY = positionYCLickSouris - (300 - joueur.getHeight() - joueur.getPosY());
 		
 		//si l'ecart d'ordonnee est plus grand, les blocks s'empilent
 		//verticalement
 		if (deltaX <= deltaY){
-			int decalageHorizontal = deltaX / (deltaY / tailleBlockTrace);
+			int decalageHorizontal = deltaX / (deltaY / EntiteTrace.tailleBlockTrace);
 						
-			for (int i = 0; i < deltaY; i += tailleBlockTrace){
-				trace.add(new EntiteTrace(curseurX, curseurY, tailleBlockTrace,
+			for (int i = 0; i < deltaY; i += EntiteTrace.tailleBlockTrace){
+				trace.add(new EntiteTrace(curseurX, curseurY,
 						this, new StrategieTrace(),
-						new Sprite(stock.getSprite(4, 1)), ttlTrace));
+						new Sprite(stock.getSprite(4, 1))));
 				
 				//il faut toujours tracer du click vers le lache
 				if (positionXCLickSouris <= positionXLacheSouris){
@@ -226,9 +251,9 @@ public class Niveau extends JPanel implements MouseListener {
 				}
 				
 				if (positionYCLickSouris <= positionYLacheSouris){
-					curseurY += tailleBlockTrace;
+					curseurY += EntiteTrace.tailleBlockTrace;
 				}else{
-					curseurY -= tailleBlockTrace;
+					curseurY -= EntiteTrace.tailleBlockTrace;
 				}
 			}
 		
@@ -236,18 +261,18 @@ public class Niveau extends JPanel implements MouseListener {
 		//si l'ecart d'abscisse est plus grand, les blocks s'empilent
 		//horizontalement
 		}else{
-			int decalageVertical = deltaY / (deltaX / tailleBlockTrace);
+			int decalageVertical = deltaY / (deltaX / EntiteTrace.tailleBlockTrace);
 			
-			for (int i = 0; i < deltaX; i += tailleBlockTrace){
-				trace.add(new EntiteTrace(curseurX, curseurY, tailleBlockTrace, 
+			for (int i = 0; i < deltaX; i += EntiteTrace.tailleBlockTrace){
+				trace.add(new EntiteTrace(curseurX, curseurY,  
 						this, new StrategieTrace(), 
-						new Sprite(stock.getSprite(4, 1)), ttlTrace));
+						new Sprite(stock.getSprite(4, 1))));
 				
 				//il faut toujours tracer du click vers le lache
 				if (positionXCLickSouris <= positionXLacheSouris){
-					curseurX += tailleBlockTrace;
+					curseurX += EntiteTrace.tailleBlockTrace;
 				}else{
-					curseurX -= tailleBlockTrace;
+					curseurX -= EntiteTrace.tailleBlockTrace;
 				}
 				
 				if (positionYCLickSouris <= positionYLacheSouris){
@@ -258,5 +283,7 @@ public class Niveau extends JPanel implements MouseListener {
 			}
 		}
 	}
+	
+
 	
 }

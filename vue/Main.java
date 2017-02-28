@@ -11,6 +11,7 @@ public class Main{
 		Niveau n = new Niveau();
 		JFrame frame = new JFrame();
 		frame.setSize(600,600);
+		//n.setSize(frame.getWidth(), frame.getHeight());
 		frame.setContentPane(n);
 		frame.setBackground(Color.black);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);		

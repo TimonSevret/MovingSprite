@@ -17,7 +17,7 @@ public class Entite {
     private Strategie strat;
 
     
-    public Entite(int posX, int posY,int tailleX,int tailleY,  Niveau niveau,boolean solid,Strategie strat, Sprite sprite){
+    public Entite(int posX, int posY, int tailleX, int tailleY, Niveau niveau,boolean solid,Strategie strat, Sprite sprite){
     	hitBox = new Rectangle(posX,posY,tailleX,tailleY);
     	this.strat = strat;
 		this.niveau = niveau;

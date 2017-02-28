@@ -5,13 +5,13 @@ import vue.Sprite;
 
 public class EntiteTrace extends Entite{
 
-	private int ttl;
+	private int ttl = 75;
+	public static int tailleBlockTrace = 5;
 	
-	public EntiteTrace(int posX, int posY, int taille, Niveau niveau, 
-			Strategie strat, Sprite sprite, int ttl) {
-		super(posX, posY, taille, taille, niveau, true, strat, sprite);
+	public EntiteTrace(int posX, int posY, Niveau niveau, 
+			Strategie strat, Sprite sprite) {
+		super(posX, posY, tailleBlockTrace, tailleBlockTrace, niveau, true, strat, sprite);
 		// TODO Auto-generated constructor stub
-		this.ttl = ttl;
 	}
 
 	public boolean doitDeceder (){

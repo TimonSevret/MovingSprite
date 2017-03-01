@@ -1,5 +1,6 @@
 package vue;
 import java.awt.Color;
+import java.io.FileNotFoundException;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -8,7 +9,13 @@ import javax.swing.WindowConstants;
 public class Main{
 	
 	public static void main (String[] args){
-		Niveau n = new Niveau();
+		Niveau n = null;
+		try {
+			n = new Niveau("Level1");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		JFrame frame = new JFrame();
 		frame.setSize(600,600);
 		frame.setContentPane(n);

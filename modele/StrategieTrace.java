@@ -9,7 +9,6 @@ public class StrategieTrace extends Strategie implements Eval {
 	public StrategieTrace() {
 		super(new Point(0,0));
 		// TODO Auto-generated constructor stub
-		enVols = true;
 	}
 
 	public int eval(Entite e,Entite [][] tiles, List<Entite> l){

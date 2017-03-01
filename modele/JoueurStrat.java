@@ -12,6 +12,7 @@ public class JoueurStrat extends Strategie{
 		super(new Point(0,0));
 	}
 	
+	@Override
 	public int eval(Entite e,Entite [][] tiles, List<Entite> l, List<EntiteTrace> lTrace){
 		return Physique.move(e, tiles, l, lTrace );
 	}

@@ -8,10 +8,10 @@ import javax.imageio.ImageIO;
 public class SpriteStocker {
 	
 	private HashMap<String,Sprite> stock;
-	private BufferedImage table;
 	
-	public SpriteStocker(String path){
+	public SpriteStocker(String path,int i){
 		stock = new HashMap<String, Sprite>();
+		BufferedImage table = null; 
 		try {
 			table = ImageIO.read(getClass().getResource(path));
 		} catch (IOException e) {
@@ -19,10 +19,10 @@ public class SpriteStocker {
 			e.printStackTrace();
 		}
 		add(new Sprite("Sprites/goblin.png"),"gob");
-		add(new Sprite(getSprite(1,1)),"sol");
-		add(new Sprite(getSprite(2,1)),"ciel");
-		add(new Sprite(getSprite(3,1)),"mur");
-		add(new Sprite(getSprite(4,1)),"nuage");
+		int j = 0;
+		while(j++ != i){
+			stock.put(""+j,new Sprite(getSprite(j, 1 ,table)));
+		}
 	}
 	
 	public void add(Sprite s,String nom){
@@ -36,9 +36,11 @@ public class SpriteStocker {
 		return null;
 	}
 	
-
+	public int getTaille(){
+		return stock.size();
+	}
 	
-	public BufferedImage getSprite(int x, int y){
+	public BufferedImage getSprite(int x, int y ,BufferedImage table){
 		return table.getSubimage(x*25-25, y*25-25, 25, 25);
 	}
 }

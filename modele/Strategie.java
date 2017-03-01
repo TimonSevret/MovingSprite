@@ -13,6 +13,7 @@ public class Strategie implements Eval{
 		enVols = true;	
 	}
 	
+	@Override
 	public int eval(Entite e,Entite [][] tiles, List<Entite> l, List<EntiteTrace> lTrace){
 		return Physique.move(e, tiles, l, lTrace);
 	}
